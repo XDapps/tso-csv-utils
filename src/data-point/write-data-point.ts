@@ -2,8 +2,6 @@ import { DataPoint } from 'tso-data-models';
 
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
-
-
 export const writeDataSinglePoint = async (path: string, record: DataPoint): Promise<void> => {
   console.log(`Writing to ${path}`);
   const csvWriter = createCsvWriter({
@@ -32,7 +30,7 @@ export const writeDataSinglePoint = async (path: string, record: DataPoint): Pro
   return await csvWriter.writeRecords(records);
 }
 
-export const writeListOfDataPoint = async (path: string, recordsList: DataPoint[]): Promise<void> => {
+export const writeListOfDataPoints = async (path: string, recordsList: DataPoint[]): Promise<void> => {
   const records: Record<string, any>[] = [];
   console.log(`Writing to ${path}`);
   const csvWriter = createCsvWriter({

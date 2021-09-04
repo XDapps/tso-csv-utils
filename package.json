@@ -1,0 +1,26 @@
+{
+  "name": "tso-csv-utils",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XDapps/tso-csv-utils.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XDapps/tso-csv-utils/issues"
+  },
+  "homepage": "https://github.com/XDapps/tso-csv-utils#readme",
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "tso-data-models": "^1.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.2"
+  }
+}

@@ -1,48 +1,47 @@
-import { DataPoint } from 'tso-data-models';
-import fs from  'fs';
-import csv from 'csv-parser';
-
+import { DataPoint, Epoch } from 'tso-data-models';
+import fs from 'fs';
+const util = require('util');
+import parse from 'csv-parse';
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const readFile = util.promisify(fs.readFile);
+const pareFilePromise = util.promisify(parse);
 
 
-export const readCurrentEpochData = async (pathToRead: string): Promise<void> => {
-  fs.createReadStream(pathToRead)
-    .pipe(csv())
-    .on('data', (row) => {
-      console.log(row);
-    })
-    .on('end', () => {
-      console.log('CSV file successfully processed');
-    });
- }
+export const readCurrentEpochData = async (pathToRead: string): Promise<Epoch> => {
+  const csvRows: any[] = await getRowsFromCSVFile(pathToRead);
+  const epochData = csvRows[0];
+  console.log('epochData ', epochData);
 
-export const writeCurrentEpochData = async (path: string, record: DataPoint): Promise<void> => {
+  const epochToReturn = new Epoch(1, 0);
+
+  return epochToReturn;
+}
+
+export const writeCurrentEpochData = async (path: string, record: Epoch): Promise<void> => {
   console.log(`Writing to ${path}`);
   const csvWriter = createCsvWriter({
     path: path,
     header: [
-      { id: 'exchange', title: 'EXCHANGE' },
-      { id: 'baseCurrency', title: 'BASE' },
-      { id: 'quoteCurrency', title: 'QUOTE' },
-      { id: 'price', title: 'PRICE' },
-      // { id: 'bid', title: 'BID' },
-      // { id: 'ask', title: 'ASK' },
-      { id: 'time', title: 'TIME' }
+      { id: 'id', title: 'ID' },
+      { id: 'start', title: 'START' },
+      { id: 'end', title: 'END' }
     ], append: true
   });
   const records = [
     {
-      exchange: record.exchange,
-      baseCurrency: record.baseCurrency,
-      quoteCurrency: record.quoteCurrency,
-      price: record.price,
-      //bid: ,
-      //ask: record.a,
-      time: record.time
+      id: record.epochNumber,
+      start: record.epochStart,
+      end: record.epochEnd
     }
   ];
   return await csvWriter.writeRecords(records);
 }
+
+export const getRowsFromCSVFile = async (csvFilePath: string): Promise<any[]> => {
+  const fileData = await readFile(csvFilePath);
+  return pareFilePromise(fileData);
+}
+
 
 
 export const writeEpochResults = async (path: string, record: DataPoint): Promise<void> => {
@@ -65,8 +64,6 @@ export const writeEpochResults = async (path: string, record: DataPoint): Promis
       baseCurrency: record.baseCurrency,
       quoteCurrency: record.quoteCurrency,
       price: record.price,
-      //bid: ,
-      //ask: record.a,
       time: record.time
     }
   ];
@@ -74,13 +71,6 @@ export const writeEpochResults = async (path: string, record: DataPoint): Promis
 }
 
 export const readEpochResults = async (path: string): Promise<void> => {
-  fs.createReadStream(path)
-    .pipe(csv())
-    .on('data', (row) => {
-      console.log(row);
-    })
-    .on('end', () => {
-      console.log('CSV file successfully processed');
-    });
+  console.log("d")
 }
 

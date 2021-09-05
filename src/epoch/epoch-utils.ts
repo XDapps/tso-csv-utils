@@ -11,7 +11,7 @@ export const readCurrentEpochData = async (pathToRead: string): Promise<OpenEpoc
   const csvRows: any[] = await getRowsFromCSVFile(pathToRead);
   const epochData = csvRows[1];
   console.log('epochData ', epochData);
-  const epochToReturn = new OpenEpoch(epochData[1], epochData[2]);
+  const epochToReturn = new OpenEpoch(epochData[0], epochData[1]);
   return epochToReturn;
 }
 
@@ -27,9 +27,9 @@ export const writeCurrentEpochData = async (path: string, record: OpenEpoch): Pr
   });
   const records = [
     {
-      id: record.epochNumber,
-      start: record.epochStart,
-      end: record.epochEnd
+      id: record.epochNumber.toNumber(),
+      start: record.epochStart.toNumber(),
+      end: record.epochEnd.toNumber()
     }
   ];
   return await csvWriter.writeRecords(records);

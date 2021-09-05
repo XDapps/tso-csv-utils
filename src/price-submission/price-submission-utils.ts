@@ -18,11 +18,11 @@ export const writePriceSubmissionData = async (path: string, submission: PriceSu
   });
   const record = [
     {
-      epochNumber: submission.epochNumber,
+      epochNumber: submission.epochNumber.toNumber(),
       assetName: submission.assetName,
       ftsoRegistryAddress: submission.ftsoRegistryAddress,
-      targetSubmitTime: submission.targetSubmitTime,
-      actualSubmitTime: submission.actualSubmitTime,
+      targetSubmitTime: submission.targetSubmitTime.toNumber(),
+      actualSubmitTime: submission.actualSubmitTime.toNumber(),
       randomNumber: submission.randomNumber,
       submitPrice: submission.submitPrice
     }

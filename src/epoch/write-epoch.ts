@@ -16,7 +16,7 @@ export const readCurrentEpochData = async (pathToRead: string): Promise<OpenEpoc
 }
 
 export const writeCurrentEpochData = async (path: string, record: OpenEpoch): Promise<void> => {
-  console.log(`Writing to ${path}`);
+  //console.log(`Writing to ${path}`);
   const csvWriter = createCsvWriter({
     path: path,
     header: [

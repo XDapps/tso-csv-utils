@@ -1,4 +1,4 @@
-import { DataPoint, Epoch } from 'tso-data-models';
+import { DataPoint, OpenEpoch } from 'tso-data-models';
 import fs from 'fs';
 const util = require('util');
 import parse from 'csv-parse';
@@ -7,17 +7,17 @@ const readFile = util.promisify(fs.readFile);
 const pareFilePromise = util.promisify(parse);
 
 
-export const readCurrentEpochData = async (pathToRead: string): Promise<Epoch> => {
+export const readCurrentEpochData = async (pathToRead: string): Promise<OpenEpoch> => {
   const csvRows: any[] = await getRowsFromCSVFile(pathToRead);
-  const epochData = csvRows[0];
+  const epochData = csvRows[1];
   console.log('epochData ', epochData);
 
-  const epochToReturn = new Epoch(1, 0);
+  const epochToReturn = new OpenEpoch(1, 0);
 
   return epochToReturn;
 }
 
-export const writeCurrentEpochData = async (path: string, record: Epoch): Promise<void> => {
+export const writeCurrentEpochData = async (path: string, record: OpenEpoch): Promise<void> => {
   console.log(`Writing to ${path}`);
   const csvWriter = createCsvWriter({
     path: path,
@@ -25,7 +25,7 @@ export const writeCurrentEpochData = async (path: string, record: Epoch): Promis
       { id: 'id', title: 'ID' },
       { id: 'start', title: 'START' },
       { id: 'end', title: 'END' }
-    ], append: true
+    ]
   });
   const records = [
     {

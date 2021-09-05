@@ -462,10 +462,10 @@ scrypt-js@3.0.1:
   resolved "https://registry.yarnpkg.com/scrypt-js/-/scrypt-js-3.0.1.tgz#d314a57c2aef69d1ad98a138a21fe9eafa9ee312"
   integrity sha512-cdwTTnqPu0Hyvf5in5asVdZocVDTNRmR7XEcJuIzMjJeSHybHl7vpB66AzwTaIg6CLSbtjcxc8fqcySfnTkccA==
 
-tso-data-models@^1.0.3:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/tso-data-models/-/tso-data-models-1.0.4.tgz#08748939aca498056c3be15af015f800176ac8fc"
-  integrity sha512-7TPaUfGiJrlR6CIxKnbGx7U47sXsP7sflhM1z8YgfmrsGBJFQ17E65A+TN98hD5LPpy8HI7dVnsDCyc0q4elDw==
+tso-data-models@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/tso-data-models/-/tso-data-models-1.0.8.tgz#87099bfd4154bc4770c6f59ed829b1741e2ccd84"
+  integrity sha512-TJTZJuaeVuIyPEHsAGdm5GabDrzaiI4S1uiVOgVt0OOG3SbPV6pafvMHI5YWhpNZbz3dafKoow3VloXNH4Oj3A==
   dependencies:
     ethers "^5.4.6"
 

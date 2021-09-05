@@ -1,6 +1,6 @@
 {
   "name": "tso-csv-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/XDapps/tso-csv-utils#readme",
   "dependencies": {
+    "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
     "tso-data-models": "^1.0.3"
   },

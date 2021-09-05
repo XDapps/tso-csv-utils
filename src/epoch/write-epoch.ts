@@ -11,9 +11,7 @@ export const readCurrentEpochData = async (pathToRead: string): Promise<OpenEpoc
   const csvRows: any[] = await getRowsFromCSVFile(pathToRead);
   const epochData = csvRows[1];
   console.log('epochData ', epochData);
-
-  const epochToReturn = new OpenEpoch(1, 0);
-
+  const epochToReturn = new OpenEpoch(epochData[1], epochData[2]);
   return epochToReturn;
 }
 

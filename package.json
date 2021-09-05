@@ -1,6 +1,6 @@
 {
   "name": "tso-csv-utils",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "dependencies": {
     "csv-parse": "^4.16.3",
     "csv-writer": "^1.6.0",
-    "tso-data-models": "^1.0.13"
+    "tso-data-models": "^1.0.14"
   },
   "devDependencies": {
     "typescript": "^4.4.2"

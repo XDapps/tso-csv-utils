@@ -1,3 +1,3 @@
-export * from './data-point/write-data-point';
+export * from './data-point/data-point-utils';
 export * from './epoch/epoch-utils';
 export * from './price-submission/price-submission-utils';

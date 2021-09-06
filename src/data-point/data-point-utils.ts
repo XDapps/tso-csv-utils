@@ -2,7 +2,7 @@ import { DataPoint } from 'tso-data-models';
 
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
-export const writeDataSinglePoint = async (path: string, record: DataPoint): Promise<void> => {
+export const writeDataSinglePoint = async (path: string, record: DataPoint, append: boolean): Promise<void> => {
 //  console.log(`Writing to ${path}`);
   const csvWriter = createCsvWriter({
     path: path,
@@ -14,7 +14,7 @@ export const writeDataSinglePoint = async (path: string, record: DataPoint): Pro
       // { id: 'bid', title: 'BID' },
       // { id: 'ask', title: 'ASK' },
       { id: 'time', title: 'TIME' }
-    ], append: true
+    ], append: append
   });
   const records = [
     {
@@ -30,7 +30,7 @@ export const writeDataSinglePoint = async (path: string, record: DataPoint): Pro
   return await csvWriter.writeRecords(records);
 }
 
-export const writeListOfDataPoints = async (path: string, recordsList: DataPoint[]): Promise<void> => {
+export const writeListOfDataPoints = async (path: string, recordsList: DataPoint[], append: boolean): Promise<void> => {
   const records: Record<string, any>[] = [];
  // console.log(`Writing to ${path}`);
   const csvWriter = createCsvWriter({
@@ -41,7 +41,7 @@ export const writeListOfDataPoints = async (path: string, recordsList: DataPoint
       { id: 'quoteCurrency', title: 'QUOTE' },
       { id: 'price', title: 'PRICE' },
       { id: 'time', title: 'TIME' }
-    ], append: true
+    ], append: append
   });
   for (let i = 0; i < recordsList.length; i++) {
     const record: DataPoint = recordsList[i];

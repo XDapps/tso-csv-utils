@@ -4,13 +4,13 @@ const util = require('util');
 import parse from 'csv-parse';
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const readFile = util.promisify(fs.readFile);
-const pareFilePromise = util.promisify(parse);
+const parseFilePromise = util.promisify(parse);
 
 
 export const readCurrentEpochData = async (pathToRead: string): Promise<OpenEpoch> => {
   const csvRows: any[] = await getRowsFromCSVFile(pathToRead);
   const epochData = csvRows[1];
-  console.log('epochData ', epochData);
+  //console.log('epochData ', epochData);
   const epochToReturn = new OpenEpoch(epochData[0], epochData[1]);
   return epochToReturn;
 }
@@ -37,7 +37,7 @@ export const writeCurrentEpochData = async (path: string, record: OpenEpoch): Pr
 
 export const getRowsFromCSVFile = async (csvFilePath: string): Promise<any[]> => {
   const fileData = await readFile(csvFilePath);
-  return pareFilePromise(fileData);
+  return await parseFilePromise(fileData);
 }
 
 

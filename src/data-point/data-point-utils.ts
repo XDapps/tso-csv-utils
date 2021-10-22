@@ -1,4 +1,5 @@
-import { DataPoint } from 'tso-data-models';
+import { DataPoint, DataPointFactory } from 'tso-data-models';
+import { getRowsFromCSVFile } from '..';
 
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
@@ -27,7 +28,11 @@ export const writeDataSinglePoint = async (path: string, record: DataPoint, appe
       time: record.time
     }
   ];
-  return await csvWriter.writeRecords(records);
+  if (record.price > 0) {
+    return await csvWriter.writeRecords(records);
+  } else {
+    return;
+  }
 }
 
 export const writeListOfDataPoints = async (path: string, recordsList: DataPoint[], append: boolean): Promise<void> => {
@@ -49,10 +54,22 @@ export const writeListOfDataPoints = async (path: string, recordsList: DataPoint
       exchange: record.exchange,
       baseCurrency: record.baseCurrency,
       quoteCurrency: record.quoteCurrency,
-      price: record.price,
-      time: record.time
+      price: parseFloat(record.price.toString()),
+      time: parseInt(record.time.toString())
     }
-    records.push(newItem);
+    if (newItem.price > 0) {
+      records.push(newItem);
+    }
   }
-  return await csvWriter.writeRecords(records);
+  if (records.length > 0) {
+    return await csvWriter.writeRecords(records);
+  } else {
+    return;
+  }
+}
+
+
+export const getListOfDataPointsFromCSVPath = async (filePath: string): Promise<DataPoint[]> => {
+  const rows = await getRowsFromCSVFile(filePath);
+  return DataPointFactory.fromCSVRows(rows);
 }

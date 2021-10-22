@@ -1,9 +1,7 @@
-
-import { PriceSubmission } from 'tso-data-models';
 import { getRowsFromCSVFile } from '..';
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
-export const writeLastStorageDayCompleted = async (lastDay: string): Promise<void> => {
+export const writeLastStorageDayCompleted = async (lastDay: number): Promise<number> => {
   //console.log(`Writing to ${path}`);
   const csvWriter = createCsvWriter({
     path: './data/storage.csv',
@@ -16,11 +14,11 @@ export const writeLastStorageDayCompleted = async (lastDay: string): Promise<voi
       lastDay: lastDay
     }
   ];
-  return await csvWriter.writeRecord(record);
+  return await csvWriter.writeRecords(record);
 }
 
-export const getLastStorageDayCompleted = async (): Promise<string> => {
-  const csvRows: any[] = await getRowsFromCSVFile('./storage');
+export const getLastStorageDayCompleted = async (): Promise<number> => {
+  const csvRows: any[] = await getRowsFromCSVFile('./data/storage.csv');
   const storageData = csvRows[1];
-  return storageData[0];
+  return parseInt(storageData[0]);
 }
